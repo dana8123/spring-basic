@@ -10,5 +10,23 @@
 - 할인 정책은 변경 가능성이 높다. 회사의 기본 할인 정책을 아직 정하지 못했고, 오픈 직전까지 고민을 미루고 싶다. 최악의 경우 할인을 적용하지 않을 수 도 있다. (미확정)
 
 ### 참고
-프로젝트 환경설정을 편리하게 하려고 스프링 부트를 사용한 것이다. 지금은 스프링 없는 순수한
-자바로만 개발을 진행한다는 점을 꼭 기억하자! 스프링 관련은 한참 뒤에 등장한다.
+```java
+package hello.core.member;
+
+public class MemberServiceImpl implements MemberService{
+
+    private final MemberRepository memberRepository = new MemoryMemberRepository(); // 구현객체
+
+    @Override
+    public void join(Member member) {
+        memberRepository.save(member);
+    }
+
+    @Override
+    public Member findMember(Long memberId) {
+        return memberRepository.findById(memberId);
+    }
+}
+```
+- 의존관계가 인터페이스 뿐만 아니라 구현까지 모두 의존하고있음
+- DIP 위반
